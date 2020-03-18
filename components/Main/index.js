@@ -5,19 +5,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Ionicons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
-
-function homeScreen() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Hola</Text>
-        </View>
-    );
-}
+import Mapa from '../Mapa';
 
 function settingsScreen() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Settings</Text>
+            <Text>Settings!</Text>
         </View>
     );
 }
@@ -26,7 +19,7 @@ const SCREEN_NAME_PARADAS = "paradas";
 const SCREEN_NAME_COMPARTIR = "compartir";
 const Tab = createBottomTabNavigator();
 
-export default function Home() {
+ function Home() {
     return (
         <NavigationContainer>
             <Tab.Navigator
@@ -36,7 +29,7 @@ export default function Home() {
                     }
                 })} 
             > 
-                <Tab.Screen name={SCREEN_NAME_MAPA} component={homeScreen} />
+                <Tab.Screen name={SCREEN_NAME_MAPA} component={Mapa} />
                 <Tab.Screen name={SCREEN_NAME_PARADAS} component={settingsScreen} />
                 <Tab.Screen name={SCREEN_NAME_COMPARTIR} component={settingsScreen} />
             </Tab.Navigator>
@@ -44,6 +37,7 @@ export default function Home() {
         </NavigationContainer>
     );
 }
+
 function getIcon(route, focused, color, size){
     switch(route.name){
         case SCREEN_NAME_MAPA:
@@ -55,3 +49,5 @@ function getIcon(route, focused, color, size){
     }
     
 }
+
+export default Home;
