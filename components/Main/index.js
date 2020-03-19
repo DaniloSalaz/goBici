@@ -3,9 +3,10 @@ import * as React from 'react';
 import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons, Entypo } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
-import Mapa from '../Mapa';
+//import Mapa from '../Mapa';
+import Parada from '../Parada';
 
 function settingsScreen() {
     return (
@@ -29,8 +30,8 @@ const Tab = createBottomTabNavigator();
                     }
                 })} 
             > 
-                <Tab.Screen name={SCREEN_NAME_MAPA} component={Mapa} />
-                <Tab.Screen name={SCREEN_NAME_PARADAS} component={settingsScreen} />
+                <Tab.Screen name={SCREEN_NAME_MAPA} component={Parada} />
+                <Tab.Screen name={SCREEN_NAME_PARADAS} component={Parada} />
                 <Tab.Screen name={SCREEN_NAME_COMPARTIR} component={settingsScreen} />
             </Tab.Navigator>
 
@@ -43,9 +44,9 @@ function getIcon(route, focused, color, size){
         case SCREEN_NAME_MAPA:
             return <Ionicons name={'ios-map'} size={size} color={color}/>;
         case SCREEN_NAME_PARADAS:
-            return <Ionicons name={'ios-bicycle'} size={size} color={color}/>;
+            return <MaterialIcons name={'local-parking'} size={size} color={color}/>;
         case SCREEN_NAME_COMPARTIR:
-            return <Ionicons name={'ios-camera'} size={size} color={color}/>; 
+            return <Entypo name={'flow-line'} size={size} color={color}/>; 
     }
     
 }
