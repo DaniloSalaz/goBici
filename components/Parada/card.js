@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import { Ionicons, Entypo } from '@expo/vector-icons';
 
+import Constants from 'expo-constants';
 const parada = {
     name: "LUIS GARCIA BERLANGA ",
     number: "52",
@@ -42,7 +43,7 @@ function ParadaCard() {
                 </View>
                 <View style={{flex:0.1}}></View>
                 <View style={styles.bickesAvailable}>
-                    <Text style={{fontSize:30, borderWidth: 0, color:'white'}}>15</Text>
+                    <Text style={{fontSize:30, borderWidth: 0, color:'white'}}>10</Text>
                     <View style={{ flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
                         <Ionicons name={'ios-bicycle'} size={20} color={'white'}/>
                         <Text style={{borderWidth: 0, color:'white' ,fontSize:9}}> Bikes Disponibles</Text>
@@ -57,11 +58,14 @@ function ParadaCard() {
 const styles = StyleSheet.create({
     container: {
         borderWidth:0,
+        marginTop: Constants.statusBarHeight,
         width: Dimensions.get('window').width - 20,
         height: Dimensions.get('window').height/5,
         backgroundColor: '#fff',
         paddingVertical: 10,
         paddingHorizontal: 10,
+        marginVertical: 8,
+        marginHorizontal: 16,
         shadowOffset: {
             width: 0,
             height: 2,
@@ -85,13 +89,13 @@ const styles = StyleSheet.create({
         flex:3,
         alignItems: 'center', 
         justifyContent:'center',
-        backgroundColor: 'blue'
+        backgroundColor: '#1565c0'
     },
     bickesAvailable:{
         flex: 3,
         justifyContent: 'center',
         alignItems: 'center', 
-        backgroundColor:'blue'
+        backgroundColor:'#1565c0'
     },
     containerBody:{
         flex: 1,

@@ -4,10 +4,11 @@ import ParadaCard from './card';
 class Parada extends Component{
     render(){
         return(
-            <View style={styles.container}>
-                <ParadaCard/>
-            </View>
-            
+          <View style={styles.container}>
+             <ParadaCard/> 
+          </View>
+           
+             
         );
     }
 }
