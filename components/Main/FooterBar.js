@@ -27,7 +27,7 @@ const Tab = createBottomTabNavigator();
                 }
             })} 
         > 
-            <Tab.Screen name={SCREEN_NAME_MAPA} component={Parada} />
+            <Tab.Screen name={SCREEN_NAME_MAPA} component={ListaParadas} />
             <Tab.Screen name={SCREEN_NAME_PARADAS} component={ListaParadas} />
             <Tab.Screen name={SCREEN_NAME_COMPARTIR} component={settingsScreen} />
         </Tab.Navigator>

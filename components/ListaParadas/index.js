@@ -6,19 +6,10 @@ import Header from '../Header';
 class ListaParadas extends Component{
     render(){
         return(
-            <View style={{flex:1}}>
-                
-                
+            <View>
                 <Paradas/>
             </View>
-        
-            
         );
     }
 }
-const styles = StyleSheet.create({
-    container: {
-      flex: 1
-    }
-  });
 export default ListaParadas;

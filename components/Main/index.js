@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderRadius: 20,
         padding: 4,
-        borderWidth: 1,
         backgroundColor: '#ffffff',
     },
     textInput: {
