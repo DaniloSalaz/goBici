@@ -12,21 +12,42 @@ import { actionCreators as actions } from '../../redux/actions';
 
 const Stack = createStackNavigator();
 class Home extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          data: [],
+          isLoading: true
+        };
+      }
+    getData(){
+        return fetch('https://json-server-cine.herokuapp.com/features')
+            .then((response) => response.json())
+            .then((json) => {this.setState({ data: json });})
+            .catch((error) => console.log(error))
+            .finally(() => {
+                this.setState({ isLoading: false });
+              });
+    } 
+    componentDidMount() {
+        this.getData();
+    }
     render() {
+        const { data, isLoading } = this.state;
         return (
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen
                         name="Home"
-                        component={FooterBar}
                         options={options(this.props)}
-                    />
+                    >{props => <FooterBar {...props} dataParada={data} updateParadas={this.getData}/>}</Stack.Screen>
                 </Stack.Navigator>
             </NavigationContainer>
 
         );
     }
 }
+
 function options(props) {
     const isHeaderRight = props.isHeaderRight;
     const isHeaderSearch = props.isHeaderSearch;
@@ -57,7 +78,7 @@ function headerSearch(setHeaderRight, setHeaderSearch) {
 }
 function headerTitle() {
     return (
-        <Text style={{ color: '#fff', fontSize: 20 }}>GoBici</Text>
+        <Text style={{ color: '#fff', fontSize: 20 }}>GoBiciii</Text>
     );
 }
 function headerRight(setHeaderRight, setHeaderSearch) {

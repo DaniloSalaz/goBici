@@ -4,7 +4,7 @@ import ParadaCard from './card';
 class Parada extends Component{
     render(){
         return(
-          <ParadaCard parada={this.props.paradaData}/> 
+          <ParadaCard parada={this.props.paradaData} fn={this.props.fn}/> 
            
              
         );

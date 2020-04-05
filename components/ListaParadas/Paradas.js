@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity, Modal,Alert } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Parada from '../Parada'
 import Constants from 'expo-constants';
 
-const DATA = [
+const data = [
   {
     id: 1,
     name: "LUIS GARCIA BERLANGA ",
@@ -18,86 +18,22 @@ const DATA = [
     updated_at: "07\/03\/2020 15:44:31",
     updatedFecha: '07-03-2020',
     updatedTime: '15:44'
-  },
-  {
-    id: 2,
-    name: "LUIS GARCIA BERLANGA ",
-    number: "52",
-    address: "Luis García Berlanga Martí - Menorca",
-    open: "T",
-    available: "50",
-    free: "0",
-    total: "50",
-    ticket: "T",
-    updated_at: "07\/03\/2020 15:44:31",
-    updatedFecha: '07-03-2020',
-    updatedTime: '15:44'
-  },
-  {
-    id: 3,
-    name: "52_C\/ LUIS GARCIA BERLANGA ",
-    number: "52",
-    address: "Luis García Berlanga Martí - Menorca",
-    open: "F",
-    available: "15",
-    free: "10",
-    total: "25",
-    ticket: "T",
-    updated_at: "07\/03\/2020 15:44:31",
-    updatedFecha: '07-03-2020',
-    updatedTime: '15:44'
-  },
-  {
-    id: 4,
-    name: "52_C\/ LUIS GARCIA BERLANGA ",
-    number: "52",
-    address: "Luis García Berlanga Martí - Menorca",
-    open: "T",
-    available: "5",
-    free: "20",
-    total: "25",
-    ticket: "T",
-    updated_at: "07\/03\/2020 15:44:31",
-    updatedFecha: '07-03-2020',
-    updatedTime: '15:44'
-  }, {
-    id: 5,
-    name: "52_C\/ LUIS GARCIA BERLANGA ",
-    number: "52",
-    address: "Luis García Berlanga Martí - Menorca",
-    open: "T",
-    available: "0",
-    free: "25",
-    total: "25",
-    ticket: "T",
-    updated_at: "07\/03\/2020 15:44:31",
-    updatedFecha: '07-03-2020',
-    updatedTime: '15:44'
-  }, {
-    id: 6,
-    name: "52_C\/ Danilo ",
-    number: "52",
-    address: "Luis García Berlanga Martí - Menorca",
-    open: "F",
-    available: "1",
-    free: "24",
-    total: "25",
-    ticket: "T",
-    updated_at: "07\/03\/2020 15:44:31",
-    updatedFecha: '07-03-2020',
-    updatedTime: '15:44'
-  },
-  
+  }
 ];
 
-function Paradas() {
+function Paradas({data}) {
   const [selectedItem, setSelectedItem] = useState(0);
-
+  const [dataParada, setDataParada] = useState([]);
+  useEffect(() =>{
+    setDataParada(data);
+  },[data])
   return (
     <SafeAreaView>
       <FlatList
-        data={DATA}
-        renderItem={({ item }) =>  item.id === selectedItem?  <ItemSelected parada={item} onSelect={setSelectedItem} />: <Item parada={item} onSelect={setSelectedItem} />}
+        data={dataParada}
+        style={{backgroundColor:''}}
+        initialNumToRender={6}
+        renderItem={({ item }) =>  item.id === selectedItem?  <ModalItem parada={item} visible={true} />: <Item parada={item} onSelect={setSelectedItem} />}
         extraData={selectedItem}
       />
     </SafeAreaView>
@@ -114,7 +50,7 @@ function Item({ parada, onSelect, selectedItem }) {
         <View style={styles.body}>
           <View style={styles.title}>
             <Text style={{ flex: 7 }}>{parada.name}</Text>
-            <MaterialCommunityIcons name={parada.ticket === 'T' ? 'credit-card' : '"credit-card-off'} style={{ flex: 1 }} color={'#1565c0'} />
+            <MaterialCommunityIcons name={parada.ticket === 'T' ? 'credit-card' : 'credit-card-off'} style={{ flex: 1 }} color={parada.ticket === 'T' ? '#1565c0' : '#ef9a9a'} />
             <Text style={{ fontSize: 10, borderWidth: 0 }}>{parada.updatedTime}</Text>
           </View>
           <Text style={{ fontSize: 12 }}>{parada.address}</Text>
@@ -137,6 +73,27 @@ function ItemSelected({ parada, onSelect, selectedItem }) {
       <Parada paradaData={parada}/>
     </TouchableOpacity>
   );
+}
+function ModalItem({ parada,visible }){
+  const [modalVisible, setModalVisible] = useState(visible);
+  return(
+      <View style={styles.centeredView}>
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+        <View style={styles.modalView}>
+        <Parada paradaData={parada} fn={setModalVisible}/>
+        </View>
+        
+        </Modal>
+      </View>
+    
+  )
 }
 const _open_color = '#81c784';
 const _close_color = '#bdbdbd';
@@ -180,6 +137,21 @@ const styles = StyleSheet.create({
   },
   close_color: {
     color: _close_color,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    marginTop: 22,
+    
+  },
+  modalView: {
+    flex:1,
+    backgroundColor:'rgba(0,0,0,0.5)',
+    borderRadius: 1,
+    padding: 35,
+    alignItems:'center',
+    justifyContent:'flex-end',
   }
 
 });

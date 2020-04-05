@@ -18,7 +18,7 @@ const SCREEN_NAME_PARADAS = "paradas";
 const SCREEN_NAME_COMPARTIR = "compartir";
 const Tab = createBottomTabNavigator();
 
- function FooterBar() {
+ function FooterBar({dataParada, updateParadas}) {
     return (
         <Tab.Navigator
             screenOptions={({route}) => ({
@@ -27,8 +27,8 @@ const Tab = createBottomTabNavigator();
                 }
             })} 
         > 
-            <Tab.Screen name={SCREEN_NAME_MAPA} component={ListaParadas} />
-            <Tab.Screen name={SCREEN_NAME_PARADAS} component={ListaParadas} />
+            <Tab.Screen name={SCREEN_NAME_MAPA}>{props => <ListaParadas {...props} dataParada={dataParada}/>}</Tab.Screen>
+            <Tab.Screen name={SCREEN_NAME_PARADAS}>{props => <ListaParadas {...props} dataParada={dataParada}/>}</Tab.Screen>
             <Tab.Screen name={SCREEN_NAME_COMPARTIR} component={settingsScreen} />
         </Tab.Navigator>
     );

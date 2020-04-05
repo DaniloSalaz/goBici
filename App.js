@@ -1,9 +1,11 @@
 import React from 'react';
 import { StyleSheet, TextInput, Text, View, Button, Dimensions } from 'react-native';
 import Home from './components/Main';
+
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import  reducer  from './redux/reducer';
+
 
 import Header from './components/Header';
 
