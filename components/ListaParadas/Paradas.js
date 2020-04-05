@@ -54,7 +54,7 @@ function Item({ parada, onSelect, selectedItem }) {
           </View>
           <Text style={{ fontSize: 12 }}>{parada.address}</Text>
           <View style={styles.footer}>
-            <Text style={{ fontSize: 11, color: '#1565c0' }}>18km</Text>
+            <Text style={{ fontSize: 11, color: '#1565c0' }}>{parada.distance}</Text>
             <Text style={{ fontSize: 10, }} style={parada.open === 'T' ? styles.open_color : styles.close_color}>{parada.open === 'T' ? name = "Abierto" : name = "Cerrado"} </Text>
           </View>
         </View>

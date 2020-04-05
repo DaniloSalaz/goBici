@@ -1,8 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Image, TextInput, Dimensions, Button, AsyncStorage, Alert } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import * as Sharing from 'expo-sharing';
 
 function Settings() {
     const [userName, setUserName] = useState(null);
+    let [selectedImage, setSelectedImage] = React.useState(null);
+
+    let openImagePickerAsync = async () => {
+        let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+
+        if (permissionResult.granted === false) {
+            alert("Permission to access camera roll is required!");
+            return;
+        }
+
+        let pickerResult = await ImagePicker.launchImageLibraryAsync();
+        console.log(pickerResult);
+        if (pickerResult.cancelled === true) {
+            return;
+        }
+
+        setSelectedImage({ localUri: pickerResult.uri });
+    };
+    let openShareDialogAsync = async () => {
+        if (!(await Sharing.isAvailableAsync())) {
+            alert(`Uh oh, sharing isn't available on your platform`);
+            return;
+        }
+
+        Sharing.shareAsync(selectedImage.localUri);
+    };
     const _retrieveData = async () => {
         try {
             const value = await AsyncStorage.getItem('USeR_G0BICI#');
@@ -13,11 +41,11 @@ function Settings() {
             console.log(error);
         }
     };
-    useEffect(()=>{
-        if( userName=== null){
+    useEffect(() => {
+        if (userName === null) {
             _retrieveData()
         }
-        
+
     })
     const _storeData = async () => {
         try {
@@ -32,13 +60,13 @@ function Settings() {
             <View style={styles.container_image}>
                 <Image style={styles.image}
                     source={require('../../images/profile.png')} />
-                    
+
             </View>
             <View style={styles.container_form}>
-                <View style={{alignItems:'center'}}>
-                <Text style={{ fontSize: 20, marginLeft: 20, align:'center' }}>Hola: {userName}</Text>
+                <View style={{ alignItems: 'center' }}>
+                    <Text style={{ fontSize: 20, marginLeft: 20, align: 'center' }}>Hola: {userName}</Text>
                 </View>
-            
+
                 <Text style={{ fontSize: 20, marginLeft: 20 }}>Login</Text>
                 <View>
                     <TextInput
@@ -46,25 +74,25 @@ function Settings() {
                         style={{ height: 40, borderColor: '#0070bc', borderBottomWidth: 1, margin: 20 }}
                         onChangeText={text => setUserName(text)}
                     />
-                    
+
                 </View>
 
                 <View>
                     <View style={styles.button}>
-                    <Button
-                        title="GUARDAR"
-                        color='white'
-                        accessibilityLabel="Learn more about this purple button"
-                        onPress={() => { _storeData()}}
-                    />
+                        <Button
+                            title="GUARDAR"
+                            color='white'
+                            accessibilityLabel="Learn more about this purple button"
+                            onPress={() => { _storeData() }}
+                        />
                     </View>
                     <View style={styles.button}>
-                    <Button
-                        title="COMPARTIR"
-                        color='white'
-                        accessibilityLabel="Learn more about this purple button"
-                        onPress={() => { }}
-                    />
+                        <Button
+                            title={selectedImage !== null?'COMPARTIR':'SELECCIONAR FOTO'}
+                            color='white'
+                            accessibilityLabel="Learn more about this purple button"
+                            onPress={selectedImage !== null?openShareDialogAsync:openImagePickerAsync}
+                        />
                     </View>
                 </View>
 
@@ -93,7 +121,7 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         alignItems: 'stretch'
     },
-    button: { 
+    button: {
         backgroundColor: "#0070bc",
         margin: 10,
         borderRadius: 10,
