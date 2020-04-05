@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, Text, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import { Ionicons, Entypo } from '@expo/vector-icons';
-import Constants from 'expo-constants';
 const parada = {
     name: "LUIS GARCIA BERLANGA ",
     number: "52",
@@ -18,12 +17,7 @@ const parada = {
 function ParadaCard({ parada,fn }) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-               onPress={() => fn(false)}
-               style={{flex:1}}
-            >
             <View style={styles.header}>
-            
                 <View style={{ flex: 4, borderWidth: 0 }}>
                     <Text>{parada.name }</Text>
                     <Text style={{ fontSize: 10 }}>{parada.address}</Text>
@@ -34,7 +28,6 @@ function ParadaCard({ parada,fn }) {
                 </View>
                 
             </View>
-            </TouchableOpacity>
             <View style={styles.body}>
                <BodyCard tipo={'bornes'} disponible={parada.free} total={parada.total} open={parada.open}/>
                 <View style={{ flex: 0.1 }}></View>

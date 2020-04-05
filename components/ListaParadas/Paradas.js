@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity, Modal,Alert } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity, Modal,Alert, TouchableHighlight } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Parada from '../Parada'
-import Constants from 'expo-constants';
 
 const data = [
   {
@@ -87,8 +86,17 @@ function ModalItem({ parada,visible }){
         }}
       >
         <View style={styles.modalView}>
+        <TouchableHighlight
+          onPress={() => {
+            setModalVisible(false);
+          }}
+          >
+            
         <Parada paradaData={parada} fn={setModalVisible}/>
-        </View>
+       
+          </TouchableHighlight>
+          </View>
+        
         
         </Modal>
       </View>

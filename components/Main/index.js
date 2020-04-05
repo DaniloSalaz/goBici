@@ -1,9 +1,9 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TextInput, Text, Dimensions, StyleSheet, View } from 'react-native';
-import { Ionicons, MaterialIcons, EvilIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import FooterBar from './FooterBar';
 
 import { bindActionCreators } from 'redux';
@@ -78,7 +78,7 @@ function headerSearch(setHeaderRight, setHeaderSearch) {
 }
 function headerTitle() {
     return (
-        <Text style={{ color: '#fff', fontSize: 20 }}>GoBiciii</Text>
+        <Text style={{ color: '#fff', fontSize: 20 }}>GoBici</Text>
     );
 }
 function headerRight(setHeaderRight, setHeaderSearch) {

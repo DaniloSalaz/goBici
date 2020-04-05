@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View } from 'react-native';
 import Paradas from './Paradas';
 import Header from '../Header';
 
