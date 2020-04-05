@@ -113,7 +113,7 @@ class MapaComponent extends Component {
                 marker.image === '2' ? require('../../images/globo2.png') :
                   marker.image === '3' ? require('../../images/globo3.png') :
                     marker.image === '4' ? require('../../images/globo4.png') :
-                      require('../../images/globo4.png')
+                      require('../../images/globo5.png')
               }
             />
           ))}

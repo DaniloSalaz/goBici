@@ -5,7 +5,7 @@ import * as geolib from 'geolib';
 
 function ListaParadas({dataParada}) {
     const [data, setData] = useState([]);
-    const [currentPosition, setCurrentPosition] = useState({latitude:'',longitude:''});
+    const [currentPosition, setCurrentPosition] = useState({latitude:39.457779,longitude:-0.387696});
     
     useEffect(()=>{
         setData(parseData(dataParada, currentPosition));
@@ -69,18 +69,7 @@ function parseLatLog(coordinates){
 }  
 function calcularDistance(currentPosition, paradaPosition){
    let dis = geolib.getDistance(currentPosition,paradaPosition);
-    return dis < 500 ? dis + ' m': (dis/1000) + ' km';
+    return dis < 900 ? dis +' m': dis/1000+ ' km';
    
 }
-// function parseData(data){
-//     let a =data.map(p => p.properties);
-//     return a.map((p ,index) => { 
-//         p.name = p.name.replace('_', ' ');
-//         p.id = index + 1; 
-//         let date = p.updated_at.split(' ')
-//         p.updatedFecha = date[0].replace('/','-');
-//         p.updatedTime = date[1];
-//         return p
-//     });
-// }
 export default ListaParadas;

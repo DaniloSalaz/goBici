@@ -33,7 +33,7 @@ function Settings() {
     };
     const _retrieveData = async () => {
         try {
-            const value = await AsyncStorage.getItem('USeR_G0BICI#');
+            const value = await AsyncStorage.getItem('US3R_G0BICI#85');
             if (value !== null) {
                 setUserName(value)
             }
@@ -49,7 +49,7 @@ function Settings() {
     })
     const _storeData = async () => {
         try {
-            await AsyncStorage.setItem('USeR_G0BICI#', userName);
+            await AsyncStorage.setItem('US3R_G0BICI#85', userName);
             console.log(userName)
         } catch (error) {
             console.log(error);

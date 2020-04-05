@@ -5,7 +5,7 @@ function Inicio({funcion}) {
     const [userName, setUserName] = useState(null);
    const  _storeData = async () => {
         try {
-          await AsyncStorage.setItem('USeR_G0BICI#', userName);
+          await AsyncStorage.setItem('US3R_G0BICI#85', userName);
           console.log(userName)
         } catch (error) {
             console.log(error);

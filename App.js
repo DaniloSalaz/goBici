@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import Home from './components/Main';
 import Inicio from './components/Inicio';
-import {AsyncStorage} from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import  reducer  from './redux/reducer';
+import reducer from './redux/reducer';
 
 
 const store = createStore(reducer);
 export default function App() {
   const [ventana, setVentana] = useState('');
-  const _retrieveData = async () =>{
+  const _retrieveData = async () => {
     try {
-      const value = await AsyncStorage.getItem('USeR_G0BICI#');
+      const value = await AsyncStorage.getItem('US3R_G0BICI#85');
       if (value !== null) {
         return 'welcome';
       }
@@ -22,31 +22,22 @@ export default function App() {
       return 'inicio';
     }
   };
-  useEffect(() =>{
+  useEffect(() => {
     _retrieveData().then(setVentana).catch(setVentana);
   });
 
-  if(ventana === 'welcome'){
-    return(
+  if (ventana === 'welcome') {
+    return (
       <Provider store={store}>
-          <Home/>
+        <Home />
       </Provider>
-      )
-    
-  }else{
-    return <Inicio funcion={setVentana}/>
+    )
+
+  } else {
+    return <Inicio funcion={setVentana} />
   }
 }
-const _retrieveData = async ({fn}) => {
-  try {
-    const value = await AsyncStorage.getItem('US3R_G0BICI#');
-    if (value !== null) {
-      fn('welcome');
-    }
-  } catch (error) {
-    fn('inicio');
-  }
-};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
